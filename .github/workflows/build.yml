@@ -123,7 +123,7 @@ jobs:
       - name: Generate apple-cn
         run: |
           grep '@cn$' ./publish/apple.txt | grep 'domain:' | sed -e 's/domain://' -e 's/:@cn$//' | sort --ignore-case -u > ./tmp/temp-apple-cn-suffix.txt
-
+          echo "push.apple.com" >>  ./tmp/temp-apple-cn-suffix.txt
           grep '@cn$' ./publish/apple.txt | grep -v 'domain:' | sed -e 's/full:/DOMAIN,/' -e 's/keyword:/DOMAIN-KEYWORD,/' -e 's/regexp:/DOMAIN-REGEX,/' -e 's/:@cn$//' > ./tmp/temp-apple-cn-other.txt
           curl -sSL ${apple_cn} | grep 'server=' | awk -F'/' '{print $2}' | sed 's/^/DOMAIN,/' | sort --ignore-case -u >> ./tmp/temp-apple-cn-other.txt
 
